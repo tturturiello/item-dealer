@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{master :: layout(~{::title},~{::meta},~{::main})}">
+
+<head>
+    <title>Login</title>
+    <meta name="description" content="Login page">
+    <meta name="keywords" content="item,login">
+</head>
+
+<body>
+<main>
+    <h3>Login</h3>
+    <hr />
+    <form method="post">
+        <div class="mb-3 row">
+            <label for="username" class="col-sm-2 col-form-label">Username</label>
+            <div class="col-sm-10">
+                <input type="text" id="username" name="username" class="form-control" placeholder="Username">
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="password" class="col-sm-2 col-form-label">Password</label>
+            <div class="col-sm-10">
+                <input type="password" id="password" name="password" class="form-control" placeholder="Password" autocomplete="new-password">
+            </div>
+        </div>
+        <input class="btn btn-primary offset-sm-2" type="submit" value="Log In">
+        <a th:href="@{/}" class="btn btn-secondary">Cancel</a>
+    </form>
+    <hr>
+    <p>Not registered yet? <a th:href="@{/register}">Register</a></p>
+</main>
+<aside>
+    <h4>Hint</h4>
+    <p><a th:href="@{/register}">Register</a></p>
+</aside>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{master :: layout(~{::title},~{::meta},~{::main})}">
+
+<head>
+    <title>Login</title>
+    <meta name="description" content="Register Page">
+    <meta name="keywords" content="item, register">
+</head>
+
+<body>
+<main>
+    <h3>Login</h3>
+    <hr />
+    <form method="post" id="register_form">
+        <div class="mb-3 row">
+            <label for="firstname" class="col-sm-2 col-form-label">Firstname</label>
+            <div class="col-sm-10">
+                <input type="text" id="firstname" name="firstname" class="form-control" placeholder="Firstname">
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="lastname" class="col-sm-2 col-form-label">Lastname</label>
+            <div class="col-sm-10">
+                <input type="text" id="lastname" name="lastname" class="form-control" placeholder="Lastname">
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="username" class="col-sm-2 col-form-label">Username</label>
+            <div class="col-sm-10">
+                <input type="text" id="username" name="username" class="form-control" placeholder="Username" autocomplete="username">
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="password" class="col-sm-2 col-form-label">Password</label>
+            <div class="col-sm-10">
+                <input type="password" id="password" name="password" class="form-control" placeholder="Password"  autocomplete="new-password">
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="password_confirm" class="col-sm-2 col-form-label">Confirm Password</label>
+            <div class="col-sm-10">
+                <input type="password" id="password_confirm" name="password_confirm" placeholder="Password Confirmation"  class="form-control">
+            </div>
+        </div>
+        <input class="btn btn-primary offset-sm-2" type="submit" value="Registrati" id="register_submit">
+        <a th:href="@{/}" class="btn" id="cancel_button">Cancel</a>
+    </form>
+    <hr>
+    <p>Sei già registrato? <a th:href="@{/login}">Log In</a></p>
+    <script th:src="@{/js/formValidator.js}"></script>
+</main>
+</body>
+</html>

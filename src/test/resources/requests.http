@@ -1,0 +1,32 @@
+GET http://localhost:8080/api/item?id=1
+Accept: application/json
+
+###
+GET http://localhost:8080/api/items
+Accept: application/json
+
+###
+POST http://localhost:8080/api/item/new
+Content-Type: application/json
+{
+    "id": 987
+    "title": "Vendo cappello",
+    "description": "Testo dell’annuncio",
+    "author": "bob",
+ }
+#{
+#    "id":4321,
+#    "title":"",
+#    "description":"test description",
+#    "date":1663327314825,
+#    "category":{"name":""},
+#    "author":{"username":"admin",
+#    "password":"admin",
+#    "role":"admin",
+#    "firstname":"",
+#    "lastname":"",
+#    "type":"Offerta"
+#}
+
+
+###

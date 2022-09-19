@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      th:replace="~{master :: layout(~{::title},~{::meta},~{::main})}">
+
+<head>
+    <title th:text="${item.title}">Advertisement has no title</title>
+    <meta name="description" th:content="${item.title}">
+</head>
+
+<body>
+<main>
+    <section class="row" th:fragment="">
+        <article class="col-md-8 ">
+            <h2 class="pb-4 mb-4 border-bottom" th:text="${item.title}">There is no ad</h2>
+            <p style="color:grey"><span class="category" style="color:black" th:text="${item.category.name}">category</span> | <span th:text="${#dates.format(item.date, 'MMMM d, yyyy')}">Date is missing</span> by <a href="#" th:text="${item.author.username}">Anonymous</a></p>
+            <p th:text="${item.description}" style="font-size:1.2rem">Item has no description</p>
+            <img class="rounded mx-auto d-block" th:src="@{'/item/'+${item.id}+'/image'}" width="100%"/>
+        </article>
+        <aside class="col-md-4">
+            <div class="p-4 mb-3 bg-light rounded" style="background-color:#eee!important">
+                <h4>Azioni</h4>
+                <a class="btn btn-sm btn-outline-secondary" sec:authorize-url="/item/*/edit" th:href="@{'/item/'+${item.id}+'/edit'}"><span class="bi-pencil"></span> Edit</a>
+                <a class="btn btn-sm btn-outline-danger" sec:authorize-url="/item/*/delete" th:href="@{'/item/'+${item.id}+'/delete'}"><span class="bi-trash"></span> Remove</a>
+            </div>
+        </aside>
+    </section>
+    <hr />
+    <a th:href="@{/}">Back to Home</a>
+</main>
+</body>
+</html>

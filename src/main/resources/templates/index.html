@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{master :: layout(~{::title},~{::meta},~{::main})}">
+<head>
+    <title>Home</title>
+    <meta name="description" content="Home page">
+    <meta name="keywords" content="item">
+</head>
+<body>
+<main>
+    <h2>Buy</h2>
+    <section class="row" th:with="items=${supplyItems}">
+        <th:block th:fragment="articles(items)" >
+            <article class="col-md-4" th:each="item : ${items}" th:fragment="itemCard(item)">
+                <div class="card mb-4 shadow-sm">
+                    <img class="bd-placeholder-img card-img-top" th:src="@{'/item/'+${item.id}+'/image'}" height="225px"/>
+                    <div class="card-body">
+                        <p style="color:grey"><span class="category" th:text="${item.category.name}">Category</span> | <span th:text="${#dates.format(item.date, 'd.MM.yyyy')}">Date is missing</span> by <a href="#" th:text="${item.author.username}">Anonymous</a></p>
+                        <p><span th:text="${item.title}">Ad has no title.</span></p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <a class="btn btn-sm btn-outline-secondary" th:href="@{'/item/'+${item.id}}">View</a>
+                                <a class="btn btn-sm btn-outline-secondary" th:href="@{'/item/'+${item.id}+'/edit'}">Edit</a>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+            </article>
+            <article class="col-md-12" th:if="${#lists.isEmpty(items)}" style="height:100px">No Ads found yet. <a th:href="@{/item/new}">Create</a> one, now!</article>
+        </th:block>
+    </section>
+    <h2>Sell</h2>
+    <section class="row">
+        <div th:replace=":: articles(${demandItems})" />
+    </section>
+</main>
+</body>
+</html>

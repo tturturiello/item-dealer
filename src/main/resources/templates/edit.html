@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      th:replace="~{master :: layout(~{::title},~{::meta},~{::main})}">
+<head>
+    <title>Insert new post</title>
+    <meta name="description" content="Post page">
+    <meta name="keywords" content="item, insert">
+</head>
+<body>
+<main>
+    <h3 th:text="${item.title == null} ? 'New Advertisement':${item.title}">Item</h3>
+    <hr />
+    <form method="post" th:object="${item}" role="form" enctype="multipart/form-data">
+        <div class="mb-3 row">
+            <label for="title" class="col-sm-2 col-form-label">Title</label>
+            <div class="col-sm-10">
+                <input type="text" id="title" class="form-control" placeholder="Titolo" th:field="*{title}">
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="description" class="col-sm-2 col-form-label">Description</label>
+            <div class="col-sm-10">
+                <textarea id="description" name="text" th:field="*{description}" class="form-control"></textarea>
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="formFile" class="col-sm-2 col-form-label">Picture (jpeg)</label>
+            <div class="col-sm-10">
+                <input class="form-control" type="file" id="formFile" name="file" accept="image/jpeg">
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="type" class="col-sm-2 col-form-label">Advert Type</label>
+            <div class="col-sm-10">
+                <select id="type" class="form-select" th:field="*{type}">
+                    <option th:each="type : ${T(ch.supsi.webapp.web.model.ItemType).values()}" th:value="${type.name()}" th:text="${type.value}"></option>
+                </select>
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="category" class="col-sm-2 col-form-label">Category</label>
+            <div class="col-sm-10">
+                <select id="category" class="form-select" th:field="${item.category}">
+                    <option th:each="cat : ${categories}" th:value="${cat.name}" th:text="${cat.name}">Uncategorized</option>
+                </select>
+            </div>
+        </div>
+        <hr>
+        <div style="position:relative" class="offset-sm-2">
+            <div style="position:absolute;left:0px">
+                <input class="btn btn-primary" type="submit" th:value="${item.id == 0} ? 'Crea annuncio':'Edit Advert'">
+                <a th:href="@{/}" class="btn btn-secondary">Cancel</a>
+            </div>
+            <div style="position:absolute;right:0px">
+                <a class="btn btn btn-outline-danger" sec:authorize-url="/item/*/delete" th:href="@{'/item/'+${item.id}+'/delete'}"><span class="oi oi-trash"></span> Remove</a>
+            </div>
+        </div>
+    </form>
+</main>
+<aside>
+    <h4>Hint</h4>
+    <p>Riempi i campi e clicca invia per salvare le modifiche</p>
+</aside>
+</body>
+</html>
